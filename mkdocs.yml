@@ -1,0 +1,13 @@
+# Conteúdo correto para mkdocs.yml
+
+site_name: DocEasyTek
+site_url: https://rgustavo32.github.io/docEasyTek/
+theme:
+  name: material
+
+nav:
+  - 'Início': 'index.md'
+  - 'Manutenção e Deploy':
+      - 'Implantação Inicial': 'manutencao_e_deploy/01_implantacao_inicial.md'
+      - 'Atualizando a Aplicação': 'manutencao_e_deploy/02_atualizando_a_aplicacao.md'
+      - 'Reset do Ambiente': 'manutencao_e_deploy/03_reset_completo_do_ambiente.md'
