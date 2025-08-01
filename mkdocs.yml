@@ -16,3 +16,4 @@ nav:
           - 'Fase 4: Merge e Oficialização': 'manutencao_e_deploy/ciclo_de_vida_atualizacao/04_merge_e_oficializacao.md'
           - 'Fase 5: Deploy em Produção': 'manutencao_e_deploy/ciclo_de_vida_atualizacao/05_deploy_em_producao.md'
       - 'Reset do Ambiente': 'manutencao_e_deploy/03_reset_completo_do_ambiente.md'
+      - 'Subir e Descer Aplicação': 'manutencao_e_deploy/04_Comandos.md'
