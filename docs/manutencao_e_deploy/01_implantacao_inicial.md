@@ -9,11 +9,53 @@ Este guia reconstrói o projeto do zero, aplicando as correções de rede e perm
 git clone https://github.com/rgustavo32/EasyTek.git EasyTek-Data
 ```
 
- **2 - Navegar e Mudar de Branch:**
+**2 - Clonando o Repositório do Projeto**
+
+Este passo irá baixar todos os arquivos do projeto do GitHub para a sua VPS.
+
+Cenário 1: Implantar a Versão Principal (Estável)
+
+Este é o cenário padrão para um ambiente de **produção**. Você irá clonar e utilizar a branch `main`, que contém a versão mais estável e testada do código.
+
+**Procedimento:**
+
+*  Execute o comando `clone`. Ele automaticamente selecionará a branch `main`.
+```bash
+git clone https://github.com/rgustavo32/EasyTek.git
+```
+*  Entre na pasta do projeto que foi criada.
 ```bash
 cd EasyTek-Data
-git checkout [Cat]/[Target]
 ```
+
+Agora você está pronto para prosseguir, utilizando a versão principal do projeto.
+
+Cenário 2: Implantar uma Funcionalidade Específica para Teste
+
+Este é o cenário para um ambiente de **teste** ou **homologação**. Você precisa testar uma branch específica (ex: `fix/loading-ux` ) que ainda não foi mesclada na `main`.
+
+**Procedimento:**
+
+*  Primeiro, clone o repositório como no cenário padrão. Isso baixa todas as branches, incluindo a que você quer testar.
+```bash
+git clone https://github.com/rgustavo32/EasyTek.git
+```
+*  Entre na pasta do projeto.
+```bash
+cd EasyTek-Data
+```
+*  **Agora, o passo mais importante:** Mude para a branch que você deseja testar. Use o comando `checkout`.
+```bash
+git checkout <nome-da-sua-branch>
+```
+*  (Opcional, mas recomendado ) Verifique se você está na branch correta.
+```bash
+git branch
+```
+    O terminal deve mostrar um asterisco (`*`) ao lado do nome da sua branch.
+
+Agora a sua VPS está com a versão exata do código que você precisa testar, e você pode prosseguir com os próximos passos da implantação.
+
 
 **3 - Criar Arquivo de Ambiente:**
 ```bash
