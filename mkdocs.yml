@@ -8,8 +8,9 @@ theme:
 nav:
   - 'Início': 'index.md'
   - 'Manutenção e Deploy':
+      - 'Fluxo de Trabalho (Resumo )': 'manutencao_e_deploy/00_fluxo_resumido.md'  # <-- NOVA PÁGINA AQUI
       - 'Implantação Inicial': 'manutencao_e_deploy/01_implantacao_inicial.md'
-      - 'Ciclo de Vida da Atualização':  # <-- Isso se torna um submenu
+      - 'Ciclo de Vida da Atualização':
           - 'Fase 1: Preparação': 'manutencao_e_deploy/ciclo_de_vida_atualizacao/01_preparacao.md'
           - 'Fase 2: Desenvolvimento Local': 'manutencao_e_deploy/ciclo_de_vida_atualizacao/02_desenvolvimento_local.md'
           - 'Fase 3: Validação em Dev': 'manutencao_e_deploy/ciclo_de_vida_atualizacao/03_validacao_em_dev.md'

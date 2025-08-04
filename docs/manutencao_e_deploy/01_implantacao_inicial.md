@@ -17,7 +17,7 @@ Este é o cenário padrão para um ambiente de **produção**. Você irá clonar
 
 *  Execute o comando `clone`. Ele automaticamente selecionará a branch `main`.
 ```bash
-git clone https://github.com/rgustavo32/EasyTek.git
+git clone https://github.com/rgustavo32/EasyTek.git EasyTek-Data
 ```
 *  Entre na pasta do projeto que foi criada.
 ```bash
@@ -34,7 +34,7 @@ Este é o cenário para um ambiente de **teste** ou **homologação**. Você pre
 
 *  Primeiro, clone o repositório como no cenário padrão. Isso baixa todas as branches, incluindo a que você quer testar.
 ```bash
-git clone https://github.com/rgustavo32/EasyTek.git
+git clone https://github.com/rgustavo32/EasyTek.git EasyTek-Data
 ```
 *  Entre na pasta do projeto.
 ```bash
@@ -102,35 +102,37 @@ GATEWAY_URL=http://event-gateway:5001
 sudo chmod -R 777 ./node-red-config
 ```
 
-**4 - Ajustar Rede para o Ambiente:** Abra o `docker-compose.yml` para edição.
-```bash   
-nano docker-compose.yml
-```
-Vá até o final e **garanta que a seção `networks` esteja correta para o ambiente em questão.**
+**4 - Inicializando os Serviços (Ordem Correta)**
 
-*   **Para a VPS de Desenvolvimento:** 
+Nossa arquitetura requer que a rede seja criada pelo proxy antes que a aplicação principal seja iniciada. A configuração do projeto já está preparada para isso, basta seguir a ordem correta.
+
+**4.1 - Inicie a Infraestrutura de Rede (Proxy):**
+Este comando utiliza o arquivo `proxy-compose.yml` para iniciar o Nginx Proxy Manager e criar a rede compartilhada `easytek-net`.
+
+> **Nota sobre Restauração:** Se você está restaurando um backup do Nginx Proxy Manager, execute o comando `sudo mv ~/nginx-proxy-manager-BACKUP ~/nginx-proxy-manager` **antes** de executar o comando abaixo.
+
+```bash
+docker-compose -f proxy-compose.yml up -d
+```
+
+**4.2 - Inicie a Aplicação Principal:**
+Este comando utiliza o arquivo docker-compose.yml principal. Graças à configuração external: true (que deve estar no seu docker-compose.yml versionado no Git), os serviços irão se conectar automaticamente à rede easytek-net criada no passo anterior.
+```bash
+docker-compose up --build -d
+```
+---
+
+**Ação Necessária no seu Código:**
+
+Para que este novo passo da documentação funcione, você precisa garantir que o arquivo `docker-compose.yml` no seu repositório Git tenha a seção `networks` da seguinte forma (e apenas desta forma):
+
 ```yaml
 networks:
-    easytek-net:
-        driver: bridge
+  easytek-net:
+    external: true
 ```
 
-*   **Para a VPS de Produção:**  
-```yaml
-networks:
-    easytek-net:
-        external: true
-        name: easytek-net
-```
-*   **Salve e feche o arquivo.**
-
-**5 - Subir a Aplicação Principal:** Use `--build` para garantir que as imagens sejam criadas corretamente.
 ```bash
-docker compose up -d --build
+docker-compose -f proxy-compose.yml up -d
 ```
 
-**6 - Restaurar e Iniciar o Proxy:**
-```bash
-sudo mv ~/nginx-proxy-manager-BACKUP ~/nginx-proxy-manager
-docker compose -f proxy-compose.yml up -d
-```

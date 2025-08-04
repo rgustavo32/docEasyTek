@@ -1,75 +1,67 @@
 ## Fase 4: Merge e Oficialização do Código
 
-### 4.1: Criando o Pull Request no GitHub
+Após validar suas alterações no ambiente de desenvolvimento, o próximo passo é integrá-las à branch principal (`main`) através de um Pull Request (PR) no GitHub.
 
-**Objetivo:** Propor formalmente que as alterações da sua branch de trabalho sejam incorporadas (mescladas) na branch principal (`main`). O Pull Request (PR) é um mecanismo de revisão que permite a você e a outros visualizarem as mudanças antes que elas se tornem parte oficial do projeto.
+### 4.1: Criando o Pull Request (PR)
+
+O PR é a maneira formal de solicitar a incorporação do seu trabalho. Ele cria um ambiente para revisão e discussão antes do merge final.
 
 **Procedimento:**
 
-1.  **Acesse o Repositório no GitHub:** Abra a página do seu projeto no navegador (ex: `https://github.com/seu-usuario/seu-repositorio` ).
+1.  **Acesse a Aba "Pull Requests":** No seu repositório no GitHub, clique na aba "Pull requests".
 
-2.  **Inicie o Pull Request:**
-    *   O GitHub geralmente detecta que você enviou uma nova branch recentemente e exibe um banner amarelo com o nome da sua branch e um botão verde **"Compare & pull request"**. Clique neste botão.
-    *   Se o banner não aparecer, vá para a aba **"Pull requests"** e clique no botão verde **"New pull request"**.
+2.  **Inicie um Novo Pull Request:** Clique no botão verde "New pull request".
 
-3.  **Configure as Branches para o Merge:** Na tela "Open a pull request", certifique-se de que as branches estão configuradas corretamente:
-    *   A branch `base` deve ser a `main` (ou `master`).
-    *   A branch `compare` deve ser a sua branch de trabalho (ex: `feat/login-com-google`).
+3.  **Selecione as Branches para o Merge:** Esta é a etapa mais importante. Você verá duas caixas de seleção:
+    *   **`base`**: Esta é a branch que receberá as alterações. Selecione `main`.
+    *   **`compare`**: Esta é a branch que contém as suas alterações. Selecione a sua branch de trabalho (ex: `fix/loading-ux`).
 
-4.  **Preencha os Detalhes do Pull Request:**
-    *   **Título:** Dê um título claro e conciso que resuma a mudança. Ele geralmente é preenchido automaticamente com a mensagem do seu último commit.
-    *   **Descrição:** Escreva um resumo do que foi feito, por que foi feito e como foi testado. Você pode referenciar os testes realizados na Fase 3.
+    > **Atenção:** O GitHub irá comparar as duas branches e mostrar um resumo das alterações. Se estiver tudo certo, você verá uma mensagem "Able to merge".
 
-5.  **Crie o Pull Request:** Role a página e clique no botão verde **"Create pull request"**.
+4.  **Preencha os Detalhes do PR:**
+    *   **Título:** Dê um título claro que siga o padrão do seu último commit (ex: `fix(webapp): implement loading overlay`).
+    *   **Descrição:** Detalhe o que foi feito, por que foi feito e como foi testado. Mencione que a validação foi concluída no ambiente de DEV.
 
-**Resultado Esperado:** Uma nova página de Pull Request será criada. Nela, você pode ver um histórico de todos os commits, os arquivos que foram alterados e iniciar discussões. O código ainda **não** foi mesclado na `main`; você apenas criou a solicitação formal para isso.
+5.  **Crie o Pull Request:** Clique em "Create pull request".
 
 ### 4.2: Revisando e Executando o Merge
 
-**Objetivo:** Realizar uma verificação final das alterações e, se tudo estiver correto, executar a fusão (merge) do código na branch `main`, tornando as mudanças uma parte permanente e oficial do projeto.
+Com o PR criado, você ou sua equipe devem revisar o código antes de oficializá-lo.
 
 **Procedimento:**
 
-1.  **Revise as Alterações:** Na página do Pull Request, navegue pela aba **"Files changed"**. O GitHub mostrará uma visão "diff", destacando em verde as linhas adicionadas e em vermelho as removidas. Esta é sua última oportunidade para pegar qualquer erro ou código indesejado.
+1.  **Revise os Arquivos:** Na página do PR, clique na aba "Files changed" para ver todas as linhas de código que foram adicionadas ou removidas.
 
-2.  **Verifique os Status de CI/CD (se aplicável):** Se o projeto tiver automações (como testes automatizados), aguarde a conclusão delas. Um "check" verde indica que tudo passou.
+2.  **Execute o Merge:** Se a revisão estiver aprovada, volte para a aba "Conversation".
+    *   Clique no botão verde **"Merge pull request"**.
+    *   Clique em **"Confirm merge"**.
 
-3.  **Execute o Merge:** Uma vez que a revisão esteja completa e você esteja confiante nas alterações, volte para a aba **"Conversation"**.
-    *   Encontre o grande botão verde **"Merge pull request"**.
-    *   Clique nele. Uma caixa de confirmação aparecerá.
-    *   Clique no botão **"Confirm merge"**.
+**Resultado:** O código da sua branch foi incorporado com sucesso à `main`.
 
-**Resultado Esperado:** O GitHub executará a fusão. A etiqueta do Pull Request mudará de "Open" (verde) para "Merged" (roxa). Neste momento, todo o código da sua branch de trabalho foi copiado com sucesso para a branch `main`, e a `main` agora contém suas novas funcionalidades ou correções.
+### 4.3: Limpando o Repositório
 
-### 4.3: Limpando a Branch de Trabalho
-
-**Objetivo:** Manter o repositório organizado, removendo a branch de trabalho que já foi mesclada. Como todo o seu conteúdo agora faz parte da `main`, a branch original não é mais necessária e pode ser deletada com segurança.
+Após o merge, a branch de trabalho já cumpriu seu propósito e deve ser removida para manter o repositório organizado.
 
 **Procedimento:**
 
 **1 - Delete a Branch Remota (no GitHub):**
 
-*   Imediatamente após o merge, na mesma página do Pull Request, o GitHub exibirá uma mensagem informando que o merge foi bem-sucedido e um botão cinza **"Delete branch"** aparecerá.
-*   Clique neste botão para remover a branch do repositório no GitHub.
+*   Na página do PR recém-mesclado, o GitHub exibirá um botão **"Delete branch"**. Clique nele para remover a branch do servidor.
 
-**2 - Delete a Branch Local (no seu PC Windows):**
+**2 - Delete a Branch Local (no seu PC):**
 
-*   Abra o terminal na pasta do seu projeto.
-*   Primeiro, mude de volta para a branch `main`.
+*   No seu terminal, volte para a branch `main` e sincronize-a para baixar o merge que você acabou de fazer.
 ```bash
 git checkout main
+git pull origin main
 ```
-*   Sincronize a `main` local para garantir que ela tenha o merge que acabamos de fazer.
+
+*   Agora, delete a cópia local da sua branch de trabalho.
 ```bash
-git pull
-```
-*   Agora, delete a cópia local da sua branch de trabalho. O `-d` (minúsculo) é uma opção segura que só deleta a branch se ela já tiver sido mesclada.
-```bash
+# Use -d (minúsculo) para uma exclusão segura
 git branch -d <nome-da-sua-branch>
 ```
-*Exemplo:* `git branch -d feat/login-com-google`
+*Exemplo:* `git branch -d fix/loading-ux`
 
-**Resultado Esperado:** Sua branch de trabalho foi removida tanto do GitHub quanto da sua máquina local. Seu repositório fica limpo e pronto para o início de uma nova tarefa, com a branch `main` contendo todas as últimas atualizações.
-
----
+**Resultado Esperado:** Sua branch de trabalho foi removida do GitHub e da sua máquina. Seu repositório está limpo e pronto para a próxima tarefa.
 

@@ -25,40 +25,60 @@ cd ~/EasyTek-Data
 **Resultado Esperado:** Você estará logado no terminal da sua VPS de Produção e dentro da pasta correta, pronto para baixar e implantar a versão final e testada da aplicação.
 
 
-### 5.2: Sincronizando a Branch `main` na Produção
+### 5.2: Sincronizando a Branch `main` na Produção (Método Robusto)
 
-**Objetivo:** Atualizar o código no servidor de produção para que ele corresponda exatamente à versão mais recente da branch `main` no GitHub, que agora inclui as alterações recém-mescladas.
+**Objetivo:** Forçar o código no servidor de produção a ser um espelho exato da branch `main` no GitHub.
 
 **Procedimento:**
 
-1.  **Mude para a Branch `main`:** É crucial garantir que você está na branch principal antes de puxar as atualizações. O servidor de produção deve sempre rodar o código da `main`.
+1.  **Atualize o "mapa" local do Git:** Este comando baixa as informações mais recentes do GitHub, garantindo que o próximo passo use a versão correta.
+```bash
+git fetch origin
+```
+
+2.  **Garanta que está na branch `main`:**
 ```bash
 git checkout main
 ```
 
-2.  **Puxe as Atualizações da `main`:** Baixe a versão mais recente do código do GitHub. Como o merge foi feito na Fase 4, este comando trará todas as novas funcionalidades e correções para o servidor.
+3.  **Force a sincronização com o repositório remoto:**
 ```bash
-git pull origin main
+git reset --hard origin/main
 ```
 
-**Resultado Esperado:** O terminal mostrará os arquivos que foram alterados, confirmando que o código da nova versão foi baixado com sucesso para a VPS de Produção. A pasta `~/EasyTek-Data` agora contém o código pronto para ser implantado.
+4.  **(Verificação) Confirme o Commit Ativo:**
+```bash
+git log -1 --pretty=format:"%h - %s"
+```
 
-### 5.3: Implantando a Versão Final
+### 5.3: Implantando a Versão Final (Método Robusto)
 
-**Objetivo:** Parar a versão antiga da aplicação e iniciar a nova versão que acabamos de baixar, disponibilizando as atualizações para todos os usuários finais.
+**Objetivo:** Realizar uma implantação limpa e ordenada no ambiente de produção, removendo todos os artefatos antigos antes de iniciar a nova versão.
 
 **Procedimento:**
 
-1.  **Verifique as Configurações do Ambiente:** Garanta que os arquivos `.env` e `docker-compose.yml` (principalmente a seção `networks`) estão corretos para o ambiente de Produção. Normalmente, nenhuma alteração é necessária nesta etapa, pois a `main` já deve conter a configuração correta para produção.
-
-2.  **Construa as Novas Imagens e Suba os Contêineres:** Use o Docker Compose para implantar a aplicação. O argumento `--build` é essencial para que o Docker utilize o novo código para recriar as imagens.
+**1 -  Pare e remova os contêineres do projeto:**
 ```bash
-docker compose up -d --build
+docker compose down
+docker compose -f proxy-compose.yml down
 ```
-*O Docker é inteligente e só reconstruirá as imagens dos serviços cujo código-fonte foi alterado (ex: `webapp`), tornando o processo eficiente.*
 
-3.  **Verificação Final:** Após a implantação, faça uma verificação rápida para garantir que a aplicação está funcionando como esperado no ambiente de produção.
-    *   Acesse o domínio principal da sua aplicação (ex: `https://app.meuprojeto.com` ) no navegador.
-    *   Teste a nova funcionalidade e verifique se as principais partes do site continuam operacionais.
+**2 - Execute a limpeza geral do Docker:** Este passo remove contêineres, imagens, volumes e redes obsoletas, garantindo que a implantação ocorra em um ambiente limpo.
+```bash
+docker container prune -f
+docker image prune -a -f
+docker volume prune -f
+docker network prune -f
+```
 
-**Resultado Esperado:** A nova versão da aplicação está no ar, em produção, e acessível a todos os usuários. O ciclo de desenvolvimento e deploy está completo.
+**3 - Inicie a Infraestrutura de Rede (Proxy):** Recrie a rede `easytek-net` e inicie o Nginx Proxy Manager.
+```bash
+docker compose -f proxy-compose.yml up -d
+```
+
+**4 - Construa e Inicie a Aplicação Principal:** Construa as novas imagens a partir do código atualizado e inicie os serviços da aplicação.
+```bash
+docker compose up --build -d
+```
+
+**5 - Verificação Final:** Acesse o domínio de produção para confirmar que a nova versão está no ar e funcionando corretamente.
