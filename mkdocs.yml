@@ -7,6 +7,7 @@ theme:
 
 nav:
   - 'Início': 'index.md'
+  - 'Lista de Pendências': 'pendence_list.md'
   - 'Manutenção e Deploy':
       - 'Fluxo de Trabalho (Resumo )': 'manutencao_e_deploy/00_fluxo_resumido.md'  # <-- NOVA PÁGINA AQUI
       - 'Implantação Inicial': 'manutencao_e_deploy/01_implantacao_inicial.md'

@@ -57,24 +57,26 @@ git checkout <nome-da-sua-branch>
 
 ### 3.3: Implantando e Testando a Nova Versão
 
-**Objetivo:** Executar a nova versão do código no servidor de desenvolvimento na ordem correta para garantir que a rede e a aplicação se conectem perfeitamente.
+**Objetivo:** Executar a nova versão do código no servidor de desenvolvimento.
 
 **Procedimento:**
 
-**1 - Pare e Remova Completamente os Contêineres Antigos (se houver):** Para garantir um teste limpo, paramos tanto a aplicação quanto a infraestrutura.
+**1 - Pare e Remova Completamente os Contêineres Antigos (se houver):**
 ```bash
-docker compose down
-docker compose -f proxy-compose.yml down
+# Use os arquivos de configuração de DEV para garantir a parada correta
+docker compose --env-file ./environments/dev/.env -f docker-compose.yml -f ./environments/dev/docker-compose.override.yml down
+docker compose --env-file ./environments/dev/.env -f proxy-compose.yml down
 ```
 
-**2 - Inicie a Infraestrutura de Rede (Proxy):** Este é o primeiro passo crucial. O comando abaixo utiliza o proxy-compose.yml para iniciar o Nginx Proxy Manager e, mais importante, criar a rede compartilhada easytek-net.
+**2 - Inicie a Infraestrutura de Rede (Proxy):** Este comando utiliza as configurações do ambiente de desenvolvimento (environments/dev/) para iniciar o Nginx Proxy Manager.
 ```bash
-docker compose -f proxy-compose.yml up -d
+docker compose --env-file ./environments/dev/.env -f proxy-compose.yml up -d
 ```
-**3 - Construa e Inicie a Aplicação Principal:** Agora que a rede easytek-net existe, o comando a seguir irá construir as novas imagens da sua branch e conectar os contêineres da aplicação à rede que acabamos de criar.
+
+**3 - Construa e Inicie a Aplicação Principal:** Agora, inicie a aplicação usando as configurações de desenvolvimento.
 
 ```bash
-docker compose up --build -d
+docker compose --env-file ./environments/dev/.env -f docker-compose.yml -f ./environments/dev/docker-compose.override.yml up -d --build
 ```
 
 **4 - Monitore a Inicialização (Opcional, mas recomendado):** Verifique se todos os contêineres subiram sem erros.

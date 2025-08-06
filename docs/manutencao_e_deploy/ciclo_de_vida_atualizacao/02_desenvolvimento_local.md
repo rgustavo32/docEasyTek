@@ -1,55 +1,31 @@
 
 
 ## Fase 2: Desenvolvimento e Teste Local
+## Fase 2: Desenvolvimento e Teste Local
+
 ### 2.1: Codificação e Testes na Máquina Local
 
-**Objetivo:** Desenvolver a funcionalidade ou correção de bug e garantir que ela funcione corretamente em um ambiente controlado antes de compartilhá-la.
+**Objetivo:** Desenvolver a funcionalidade ou correção e garantir que ela funcione corretamente no ambiente local antes de compartilhá-la.
 
 **Procedimento:**
 
-**1 - Desenvolva o Código:** Utilize seu editor de código (VS Code, etc.) para fazer todas as alterações necessárias nos arquivos do projeto. Crie novos arquivos, modifique os existentes, e implemente a lógica da sua tarefa.
+**1 - Desenvolva o Código:** Utilize seu editor de código para fazer todas as alterações necessárias.
 
-**2 - Teste a Aplicação Localmente:** É crucial validar se suas alterações não quebraram nada e se a nova funcionalidade se comporta como o esperado. Para garantir que a aplicação inicie corretamente, siga a ordem de inicialização.
+**2 - Teste a Aplicação Localmente:** Para garantir que a aplicação inicie corretamente com a configuração do ambiente **local**, siga a ordem de inicialização.
 
-*   **Abra o terminal** na pasta do projeto.
+*   **Abra o terminal** na pasta raiz do projeto.
 
-*   **Passo 2.1: Inicie a Infraestrutura de Rede (se não estiver rodando).** Este comando cria a rede compartilhada `easytek-net` que a aplicação precisa.
+*   **Passo 2.1: Inicie a Infraestrutura de Rede e Proxy.** Este comando utiliza a configuração definida em `environments/local/.env` para iniciar o Nginx Proxy Manager e criar a rede compartilhada.
 ```bash
-docker compose -f proxy-compose.yml up -d
+docker compose --env-file ./environments/local/.env -f proxy-compose.yml up -d
 ```
 
-*   **Passo 2.2: Inicie a Aplicação Principal.** O comando `--build` é importante caso você tenha alterado o código-fonte.
+*   **Passo 2.2: Inicie a Aplicação Principal.** Este comando utiliza o arquivo de configuração base (`docker-compose.yml`) e o sobrepõe com as definições específicas do ambiente local (como o Portainer). O `--build` reconstrói as imagens se você alterou o código.
 ```bash
-docker compose up -d --build
+docker compose --env-file ./environments/local/.env -f docker-compose.yml -f ./environments/local/docker-compose.override.yml up -d --build
 ```
 
-#### **Solução de Problemas: Erro `network ... was found but has incorrect label`**
-
-Este erro ocorre se o Docker Compose detectar uma rede com o mesmo nome (`easytek-net`) que ele tenta criar, mas que não foi criada por ele. Isso pode acontecer se a rede foi criada manualmente ou por outro processo.
-
-**Procedimento de Correção (Limpeza da Rede Local):**
-
-A solução é remover a rede conflitante para permitir que o Docker Compose a recrie corretamente.
-
-**1 - Pare todos os serviços que possam estar usando a rede:**
-```bash
-docker compose down
-docker compose -f proxy-compose.yml down
-```
-**2 - Remova a rede manualmente:**
-```bash
-docker network rm easytek-net
-```
-**3 - Tente o procedimento de inicialização novamente:**
-```bash
-docker compose -f proxy-compose.yml up -d
-docker compose up -d --build
-```
-
-*   **Acesse a aplicação** no seu navegador (geralmente em `http://localhost:<porta>` ) e realize testes manuais para validar o resultado.
-
-
-**3 - Repita o Ciclo:** Caso encontre problemas, pare a aplicação (`docker compose down`), corrija o código e repita o passo 2 até que a funcionalidade esteja estável e completa no seu ambiente local.
+*   **Acesse a aplicação** no seu navegador e realize testes manuais para validar o resultado.
 
 ### 2.2: Salvando o Progresso com Commits
 
@@ -125,32 +101,24 @@ git push --force --set-upstream origin <nome-da-sua-branch>
 
 ### 2.4: Finalizando e Limpando o Ambiente Local
 
-**Objetivo:** Após concluir e salvar todo o seu trabalho local (com `git commit` e `git push`), é uma boa prática realizar uma limpeza completa do ambiente Docker para liberar recursos e evitar o acúmulo de dados obsoletos.
+**Objetivo:** Liberar recursos e evitar o acúmulo de dados obsoletos após a conclusão do trabalho local.
 
 **Procedimento:**
 
-Este deve ser o último passo executado no seu PC local antes de você mover seu foco para o ambiente de desenvolvimento (VPS de DEV).
-
-1.  **Pare e remova os contêineres do projeto:**
+1.  **Pare e remova os contêineres do projeto:** Use os mesmos arquivos de configuração para garantir que todos os serviços (base e locais) sejam encerrados.
 ```bash
-#Parando todos os serviços
-docker compose down
-docker compose -f proxy-compose.yml down
+# Parando a aplicação principal e serviços locais
+docker compose --env-file ./environments/local/.env -f docker-compose.yml -f ./environments/local/docker-compose.override.yml down
+
+# Parando o proxy
+docker compose --env-file ./environments/local/.env -f proxy-compose.yml down
 ```
 
 2.  **Execute a limpeza geral do Docker:**
-
 ```bash
-# Remove todos os contêineres parados (não apenas os do projeto)
 docker container prune -f
-
-# Remove todas as imagens que não estão sendo usadas por nenhum contêiner
 docker image prune -a -f
-
-# Remove todos os volumes não utilizados
 docker volume prune -f
-
-# Remove todas as redes não utilizadas
 docker network prune -f
 ```
 

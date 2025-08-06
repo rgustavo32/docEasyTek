@@ -61,6 +61,11 @@ git log -1 --pretty=format:"%h - %s"
 ```bash
 docker compose down
 docker compose -f proxy-compose.yml down
+#=======================================
+# Use os arquivos de configuração de PROD para garantir a parada correta
+docker compose --env-file ./environments/prod/.env -f docker-compose.yml -f ./environments/prod/docker-compose.override.yml down
+docker compose --env-file ./environments/prod/.env -f proxy-compose.yml down
+
 ```
 
 **2 - Execute a limpeza geral do Docker:** Este passo remove contêineres, imagens, volumes e redes obsoletas, garantindo que a implantação ocorra em um ambiente limpo.
@@ -73,12 +78,13 @@ docker network prune -f
 
 **3 - Inicie a Infraestrutura de Rede (Proxy):** Recrie a rede `easytek-net` e inicie o Nginx Proxy Manager.
 ```bash
-docker compose -f proxy-compose.yml up -d
+docker compose --env-file ./environments/prod/.env -f proxy-compose.yml up -d
 ```
 
 **4 - Construa e Inicie a Aplicação Principal:** Construa as novas imagens a partir do código atualizado e inicie os serviços da aplicação.
 ```bash
-docker compose up --build -d
+docker compose --env-file ./environments/prod/.env -f docker-compose.yml -f ./environments/prod/docker-compose.override.yml up -d --build
+
 ```
 
 **5 - Verificação Final:** Acesse o domínio de produção para confirmar que a nova versão está no ar e funcionando corretamente.
