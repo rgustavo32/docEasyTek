@@ -1,6 +1,6 @@
 # Fluxo de Trabalho Completo de Atualização
 
-Este documento resume o ciclo de vida completo para o desenvolvimento, teste e implantação de uma nova funcionalidade ou correção.
+Este documento resume o ciclo de vida completo para o desenvolvimento, teste e implantação de uma nova funcionalidade ou correção, utilizando os scripts de automação do projeto.
 
 ---
 
@@ -18,7 +18,8 @@ O trabalho começa no seu computador de desenvolvimento.
 *   **1.3. Codificar a Alteração:** Implementar a nova funcionalidade ou correção.
 
 *   **1.4. Testar Localmente:** Validar se a alteração funciona no seu ambiente Docker local.
-    *   `docker-compose up --build -d`
+    *   **Primeira vez?** Garanta que seu arquivo `hosts` está configurado (conforme documentação detalhada).
+    *   `./scripts/up.ps1 -env local` (no Windows) ou `./scripts/up.sh local` (no Linux).
 
 *   **1.5. Salvar o Trabalho (Commit):** Criar um ponto de salvamento com uma mensagem descritiva.
     *   `git add .`
@@ -36,18 +37,19 @@ As alterações são testadas em um ambiente idêntico ao de produção.
 *   **2.1. Acessar a VPS de DEV:** Conectar-se ao servidor de testes.
     *   `ssh <user>@<vps-dev-ip>`
 
-*   **2.2. Baixar a Nova Branch:** Trazer o código do GitHub para a VPS.
+*   **2.2. Baixar e Preparar a Nova Branch (Método Robusto):** Traz o código do GitHub para a VPS, limpando e preparando o ambiente.
+    *   `git checkout main`
+    *   `git pull origin main`
     *   `git fetch origin`
     *   `git checkout <nome-da-branch>`
-    *   `git pull`
+    *   `git reset --hard origin/<nome-da-branch>`
+    *   `sudo git clean -fd`
+    *   `chmod +x ./scripts/*.sh` (Crítico para dar permissão de execução)
 
-*   **2.3. Parar Contêineres Antigos:** Garantir um ambiente de teste limpo.
-    *   `docker-compose down`
+*   **2.3. Implantar para Teste:** Construir e iniciar a nova versão usando o script.
+    *   `./scripts/up.sh dev`
 
-*   **2.4. Implantar para Teste:** Construir e iniciar a nova versão.
-    *   `docker-compose up --build -d`
-
-*   **2.5. Testar no Domínio de DEV:** Validar a funcionalidade no navegador.
+*   **2.4. Testar no Domínio de DEV:** Validar a funcionalidade no navegador.
 
 ---
 
@@ -55,7 +57,7 @@ As alterações são testadas em um ambiente idêntico ao de produção.
 
 Após a validação, o código é formalmente incorporado e o ambiente de teste é desligado.
 
-*   **3.1. Criar Pull Request:** No GitHub, abrir um PR de `<sua-branch>` para a `main`.
+*   **3.1. Criar Pull Request:** No GitHub, abrir um PR de `<sua-branch>` para a `main` (usando a aba "Pull requests").
 
 *   **3.2. Revisar e Fazer o Merge:** Aprovar e mesclar o Pull Request no GitHub.
 
@@ -64,7 +66,8 @@ Após a validação, o código é formalmente incorporado e o ambiente de teste 
     *   Localmente: `git checkout main`, `git pull`, `git branch -d <nome-da-branch>`.
 
 *   **3.4. Desligar Serviços na DEV:** Acessar a VPS de DEV e liberar os recursos.
-    *   `docker-compose down`
+    *   `./scripts/down.sh dev`
+    *   `docker container prune -f && docker image prune -a -f` (Limpeza opcional)
 
 ---
 
@@ -75,14 +78,16 @@ A nova versão é finalmente disponibilizada para os usuários finais.
 *   **4.1. Acessar a VPS de PROD:** Conectar-se ao servidor de produção.
     *   `ssh <user>@<vps-prod-ip>`
 
-*   **4.2. Sincronizar a `main`:** Atualizar o código do servidor com a versão recém-mesclada.
+*   **4.2. Sincronizar a `main` (Método Robusto):** Atualizar o código do servidor com a versão recém-mesclada.
     *   `git checkout main`
     *   `git pull origin main`
+    *   `git reset --hard origin/main`
+    *   `sudo git clean -fd`
+    *   `chmod +x ./scripts/*.sh`
 
-*   **4.3. Parar a Versão Atual:** Garantir uma transição segura e controlada.
-    *   `docker-compose down`
+*   **4.3. Implantar a Versão Final:** Parar a versão antiga, limpar o ambiente e iniciar a nova.
+    *   `./scripts/down.sh prod`
+    *   `docker image prune -a -f` (Recomendado para limpar imagens antigas)
+    *   `./scripts/up.sh prod`
 
-*   **4.4. Implantar a Versão Final:** Construir e iniciar a nova versão.
-    *   `docker-compose up --build -d`
-
-*   **4.5. Verificação Final:** Testar rapidamente a aplicação no domínio de produção.
+*   **4.4. Verificação Final:** Testar rapidamente a aplicação no domínio de produção.
