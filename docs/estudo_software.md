@@ -18,11 +18,11 @@
 
 ### Pontos chaves a serem observados:
 
-*   **Observe o registro `1004`:** Monitore este registro para garantir que o sinal da entrada analógica (PV bruto) está sendo lido corretamente.
+*   **Observe o registro `1004`:** Monitorar este registro para garantir que o sinal da entrada analógica (PV bruto) está sendo lido corretamente.
 
-*   **Observe o registro `4100` (SP) e `5030` (PV):** Estes são os dois valores mais importantes. Compare-os. Eles devem estar na mesma escala. O PID trabalhará para fazer com que o valor de `5030` se iguale ao de `4100`.
+*   **Observe o registro `4100` (SP) e `5030` (PV):** Estes são os dois valores mais importantes. Comparar. Eles devem estar na mesma escala. O PID trabalhará para fazer com que o valor de `5030` se iguale ao de `4100`.
 
-*   **Observe o registro `4130`:** Esta é a **saída calculada pelo PID**. Monitore este valor para ver se o PID está reagindo às mudanças no erro. Se o erro é grande, `4130` deve mudar significativamente. Se o erro é zero, `4130` deve se estabilizar.
+*   **Observe o registro `4130`:** Esta é a **saída calculada pelo PID**. Monitorar este valor para ver se o PID está reagindo às mudanças no erro. Se o erro é grande, `4130` deve mudar significativamente. Se o erro é zero, `4130` deve se estabilizar.
 
 ### Resumo: Ação de Controle (PID) para a Saída Analógica
 
@@ -42,9 +42,9 @@
 
 ### Pontos chaves a serem observados:
 
-*   **Observe o registro `4130`:** Verifique se o PID está gerando uma saída coerente. Se o erro (SP-PV) muda, `4130` deve mudar também.
+*   **Observe o registro `4130`:** Verificar se o PID está gerando uma saída coerente. Se o erro (SP-PV) muda, `4130` deve mudar também.
 
-*   **Observe o registro `7200`:** Confirme se o sinal de velocidade da encadernadora está sendo lido corretamente.
+*   **Observe o registro `7200`:** Confirmar se o sinal de velocidade da encadernadora está sendo lido corretamente.
 
 *   **Observe o registro `4030`:** Este é o valor "pré-saída", o resultado final de todos os cálculos (PID + velocidade + escalonamento). É o valor mais importante para diagnosticar a lógica de controle.
 
