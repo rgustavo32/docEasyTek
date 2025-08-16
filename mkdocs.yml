@@ -10,7 +10,7 @@ nav:
   - 'Lista de Pendências': 'pendence_list.md'
   - 'Guia para Analise - Tensionadora': 'estudo_software.md'
   - 'Manutenção e Deploy':
-      - 'Fluxo de Trabalho (Resumo )': 'manutencao_e_deploy/00_fluxo_resumido.md'  # <-- NOVA PÁGINA AQUI
+      - 'Fluxo de Trabalho (Resumo )': 'manutencao_e_deploy/00_fluxo_resumido.md'  
       - 'Implantação Inicial': 'manutencao_e_deploy/01_implantacao_inicial.md'
       - 'Ciclo de Vida da Atualização':
           - 'Fase 1: Preparação': 'manutencao_e_deploy/ciclo_de_vida_atualizacao/01_preparacao.md'
