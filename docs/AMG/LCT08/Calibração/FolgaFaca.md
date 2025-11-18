@@ -1,7 +1,7 @@
 # Procedimento de Calibração de Folga de Faca (Knife Gap) - Cizalha Rotativa LCT08
 
 **Autor:** Rodolfo Silva  
-**Data:** 17 de Novembro de 2025  
+**Data:** 30 de Outubro de 2025  
 **Máquina:** LCT08
 
 ---
@@ -28,8 +28,8 @@ Onde:
 
 - **Y:** Folga da faca calculada (mm)  
 - **X:** Valor atual do sensor lido pelo CLP (%)  
-- **(X₁, Y₁):** Ponto de calibração 1 (Sensor %, Folga mm)  
-- **(X₂, Y₂):** Ponto de calibração 2 (Sensor %, Folga mm)
+- **(X₁  ,  Y₁):** Ponto de calibração 1 (Sensor %, Folga mm)  
+- **(X₂  ,  Y₂):** Ponto de calibração 2 (Sensor %, Folga mm)
 
 ### 2.2. TAGs de Calibração no Studio 5000
 
@@ -63,7 +63,7 @@ O procedimento requer colaboração entre a equipe de **Manutenção Mecânica**
 
 ---
 
-### 3.2. Obtenção do Ponto de Calibração 1 (X₁, Y₁)
+### 3.2. Obtenção do Ponto de Calibração 1 (X₁ , Y₁)
 
 #### 1. Medição Mecânica (Y₁)
 

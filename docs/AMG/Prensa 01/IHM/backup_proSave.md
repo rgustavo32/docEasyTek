@@ -2,7 +2,7 @@
 
 **Autor:** Rodolfo Silva  
 **Data:** 17 de Novembro de 2025  
-**Máquina:** LCT08
+**Máquina:** Prensa 01
 
 ## Objetivo:
 
