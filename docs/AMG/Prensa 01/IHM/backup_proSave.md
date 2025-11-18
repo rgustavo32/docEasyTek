@@ -38,9 +38,11 @@ Esta é a fase mais crítica. A configuração deve ser idêntica no PC e na IHM
     *   Reinicie a IHM. Durante a inicialização, uma tela de boot aparecerá. Pressione o botão **"Control Panel"**.
     *   Dentro do "Control Panel", clique no ícone **"Transfer Settings"** ou **"Transfer"**.
     *   Uma nova janela se abrirá. Selecione a aba **"Ethernet"** ou **"Advanced"**.
+    ![Tela "Transffer Settings" da IHM](../../../Assets/Images/IMG_ProSave_TS-ETH.jpeg)
     *   Marque a opção **"Enable Transfer"** (ou "Enable Channel").
     *   **Anote o endereço IP** exibido na tela para confirmar que é o mesmo que você inseriu no ProSave.
-    *   Feche a janela e volte para a tela Inicial onde as opções **"Transfer", "Start", "Control Panel" e "TaskBar"** aparece
+    *   Feche a janela e volte para a tela Inicial onde as opções **"Transfer", "Start", "Control Panel" (ou "Settings") e "TaskBar"** aparece  
+    ![Tela "Options" da IHM](../../../Assets/Images/IMG_HMI_Options.png)
     *   Seleciona **"Transfer"**. Somente apos entrar nesse modo, onde aparece a mensagem *"Connecting to Host"*, será possível ao ProSave se conectar a IHM
 #### **Opção B: Conexão via MPI/PROFIBUS**
 
@@ -52,10 +54,12 @@ Esta é a fase mais crítica. A configuração deve ser idêntica no PC e na IHM
 
 2.  **Na IHM:**
     *   Siga os mesmos passos para entrar no modo **"Transfer"**: `Reiniciar -> Control Panel -> Transfer Settings`.
-    *   Selecione a aba **"MPI/DP"**.
-    *   Marque a opção **"Enable Transfer"**.
+    *   Selecione a aba **"MPI/DP"**.  
+    ![Tela "Transffer Settings" da IHM](../../../Assets/Images/IMG_ProSave_TS-MPI.jpeg)
+    *   Marque a opção **"Enable Transfer"**(ou "Enable Channel").
     *   Confirme o endereço do nó (Node Address) e a velocidade da rede (Baud Rate).
-    *   Feche a janela e volte para a tela Inicial onde as opções **"Transfer", "Start", "Control Panel" e "TaskBar"** aparece
+    *   Feche a janela e volte para a tela Inicial onde as opções **"Transfer", "Start", "Control Panel" (ou "Settings") e "TaskBar"** aparece  
+    ![Tela "Options" da IHM](../../../Assets/Images/IMG_HMI_Options.png)
     *   Seleciona **"Transfer"**. Somente apos entrar nesse modo, onde aparece a mensagem *"Connecting to Host"*, será possível ao ProSave se conectar a IHM
 
 #### **Opção C: Conexão via USB (Para Painéis Modernos)**
@@ -69,8 +73,10 @@ Este método é comum para painéis mais novos (Comfort, Basic de 2ª geração)
 2.  **Na IHM:**
     *   Siga os mesmos passos para entrar no modo **"Transfer"**: `Reiniciar -> Control Panel -> Transfer Settings`.
     *   Selecione a aba **"USB"**.
-    *   Marque a opção **"Enable Transfer"**. A IHM deve indicar que uma conexão USB está ativa.
-    *   Feche a janela e volte para a tela Inicial onde as opções **"Transfer", "Start", "Control Panel" e "TaskBar"** aparece
+    ![Tela "Transffer Settings" da IHM](../../../Assets/Images/IMG_ProSave_TS-USB.jpeg)
+    *   Marque a opção **"Enable Transfer"**(ou "Enable Channel").
+    *   Feche a janela e volte para a tela Inicial onde as opções **"Transfer", "Start", "Control Panel" (ou "Settings") e "TaskBar"** aparece  
+    ![Tela "Options" da IHM](../../../Assets/Images/IMG_HMI_Options.png)
     *   Seleciona **"Transfer"**. Somente apos entrar nesse modo, onde aparece a mensagem *"Connecting to Host"*, será possível ao ProSave se conectar a IHM
 
 ---

@@ -1,14 +1,37 @@
 # Procedimento Prático: Ajuste e Sincronização de Motores
-
+**Autor:** Rodolfo Silva  
+**Data:** 7 de Outubro de 2025  
+**Máquina:** LCT16
 ## 1. Objetivo
 
-Este guia prático ensina como identificar um motor fora de sincronia, calcular a diferença de velocidade e ajustar os parâmetros para que todos os motores voltem a funcionar em harmonia.
+Auxiliar no procedimento de troca de motor, cálculo dos fatores de relação e ajuste de sincronismo para relação de velocidade da linha entre motores de tração
 
 ---
 
-## 2. Exemplo Prático: Análise da Situação
+## 2. Exemplo Prático: 
 
-Vamos analisar um cenário real. A máquina foi projetada para que todos os motores trabalhem com uma relação de velocidade (fator) de **1.0**. Isso garante uma operação sincronizada.
+**Motor Aplanadora:**  
+Motor anterior: 1240 RPM
+Motor Atual: 676 RPM
+
+### Dados de Relação no Programa
+| Nome do Motor              | Fator de Relação Atual |
+| -------------------------- | ---------------------- |
+| `APL_RELACION_REDUCTORA`   | **1.00**               |
+| `DES_RELACION_REDUCTORA`   | **1.66**               |
+| `END_RELACION_REDUCTORA`   | **0.96**               |
+| `TRA_RELACION_REDUCTORA`   | **1.00**               |
+
+Para sabermos a diferença em porcentagem, devemos dividir a velocidade do motor que irá entrar pela velocidade do motor que saiu:
+
+```
+ΔVel = RPM_MotorAtual / RPM_MotorAnterior
+     = 676 / 1240
+     ≈ 0.545
+```
+
+Isso mostra que o motor novo representa aproximadamente 0.545 ou 54.5% da velocidade do motor anterior. Sendo assim, para que os outros motores trabalhem em sincronismo com o motor 
+
 
 #### Dados da Configuração Original (Motor de Referência)
 
