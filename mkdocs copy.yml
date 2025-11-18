@@ -1,6 +1,7 @@
+# Conteúdo correto para mkdocs.yml
+
 site_name: DocEasyTek
 site_url: https://rgustavo32.github.io/docEasyTek/
-
 theme:
   name: material
 
@@ -10,9 +11,6 @@ nav:
       - 'LCT08':
           - 'Calibração':
               - 'Calibração da Folga da Faca': 'AMG/LCT08/Calibração/FolgaFaca.md'
-      - 'LCT16':
-          - 'Calibração':
-              - 'Troca de Motor': 'AMG/LCT16/Calibração/TrocaMotor.md'
       - 'Prensa01':
           - 'IHM':
               - 'Backup da Aplicação: Simatic ProSave': 'AMG/Prensa 01/IHM/backup_proSave.md'
@@ -29,15 +27,3 @@ nav:
           - 'Fase 5: Deploy em Produção': 'manutencao_e_deploy/ciclo_de_vida_atualizacao/05_deploy_em_producao.md'
       - 'Reset do Ambiente': 'manutencao_e_deploy/03_reset_completo_do_ambiente.md'
       - 'Subir e Descer Aplicação': 'manutencao_e_deploy/04_Comandos.md'
-
-# Pode deixar vazio ou com outras extensões que você quiser.
-# O importante aqui é NÃO usar pymdownx.arithmatex nesta solução simples.
-markdown_extensions: []
-
-extra_javascript:
-  - javascripts/katex-init.js
-  - https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js
-  - https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js
-
-extra_css:
-  - https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css
