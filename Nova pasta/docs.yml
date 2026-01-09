@@ -1,0 +1,35 @@
+# docs.yml - Configuração da navegação de procedimentos
+# Este arquivo define a estrutura completa da sidebar de documentação.
+# Edite este arquivo para reorganizar, adicionar ou remover documentos.
+
+title: "Procedimentos"
+icon: "bi-book"
+index: "index.md"
+
+sections:
+  # Manutenção Preventiva
+  - name: "preventive"
+    label: "Preventiva"
+    icon: "bi-calendar-check"
+    expanded: false
+    files:
+      - path: "preventive/daily.md"
+        # title é opcional - se não informado, extrai do H1 do arquivo
+
+  # Manutenção Corretiva
+  - name: "corrective"
+    label: "Corretiva"
+    icon: "bi-tools"
+    expanded: false
+    files:
+      - path: "corrective/index.md"
+        title: "Diagnóstico de Falhas"
+
+  # Procedimentos de Emergência
+  - name: "emergency"
+    label: "Emergência"
+    icon: "bi-exclamation-triangle"
+    expanded: false
+    files:
+      - path: "emergency/shutdown.md"
+        title: "Procedimento de Parada"

@@ -7,6 +7,9 @@ theme:
 nav:
   - 'Início': 'index.md'
   - 'AMG':
+      - 'IHM':
+          - 'Rockwell':
+              - 'Comunicação IHM Rockwell': 'AMG/IHM/Rockwell/comunicacaoIHM_Rockwell.md'
       - 'LCT08':
           - 'Calibração':
               - 'Calibração da Folga da Faca': 'AMG/LCT08/Calibração/FolgaFaca.md'
@@ -16,6 +19,9 @@ nav:
       - 'Prensa01':
           - 'IHM':
               - 'Backup da Aplicação: Simatic ProSave': 'AMG/Prensa 01/IHM/backup_proSave.md'
+      - 'Revisoes':
+          - 'LCT08':
+              - 'Rev001': 'AMG/Revisões/LCT08/LCT08_Rev001.md'
   - 'Lista de Pendências': 'pendence_list.md'
   - 'Guia para Analise - Tensionadora': 'estudo_software.md'
   - 'Manutenção e Deploy':

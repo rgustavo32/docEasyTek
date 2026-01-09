@@ -30,7 +30,7 @@ Para sabermos a diferença em porcentagem, devemos dividir a velocidade do motor
      ≈ 0.545
 ```
 
-Isso mostra que o motor novo representa aproximadamente 0.545 ou 54.5% da velocidade do motor anterior. Sendo assim, para que os outros motores trabalhem em sincronismo com o motor 
+Isso mostra que o motor novo representa aproximadamente 0.545 ou 54.5% da velocidade do motor anterior. Sendo assim, para que os outros motores trabalhem em sincronismo com o motor da Aplanadora
 
 
 #### Dados da Configuração Original (Motor de Referência)
