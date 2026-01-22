@@ -10,6 +10,9 @@ nav:
       - 'IHM':
           - 'Rockwell':
               - 'Comunicação IHM Rockwell': 'AMG/IHM/Rockwell/comunicacaoIHM_Rockwell.md'
+      - 'LCT2,5':
+          - 'Calibração':
+              - 'Calibração da Folga da Faca': 'AMG/LCT 2,5/Treinamento/TreinamentoCalibracao.md'
       - 'LCT08':
           - 'Calibração':
               - 'Calibração da Folga da Faca': 'AMG/LCT08/Calibração/FolgaFaca.md'
@@ -35,6 +38,7 @@ nav:
           - 'Fase 5: Deploy em Produção': 'manutencao_e_deploy/ciclo_de_vida_atualizacao/05_deploy_em_producao.md'
       - 'Reset do Ambiente': 'manutencao_e_deploy/03_reset_completo_do_ambiente.md'
       - 'Subir e Descer Aplicação': 'manutencao_e_deploy/04_Comandos.md'
+      - 'LCT2.5': 'LCT_25.md'
 
 # Pode deixar vazio ou com outras extensões que você quiser.
 # O importante aqui é NÃO usar pymdownx.arithmatex nesta solução simples.
